@@ -1,5 +1,7 @@
 var db = require('../db');
 var mysql = require('mysql');
+var indexCounter = 0;
+
 
 module.exports = {
   messages: {
@@ -13,7 +15,11 @@ module.exports = {
     }, // a function which produces all the messages
     post: function (msg) {
       console.log('POST MESSAGE: ', msg);
-      var sql = "INSERT INTO messages VALUES "
+      var sql = "INSERT INTO messages (ID, text, rommname) VALUES ";
+      var value = '(' + msg.ID + ", '" + msg.text + "', '" + msg.rommname + "')";
+      sql = sql + value;
+      console.log('SQL MESSAGE: ', sql);
+      indexCounter++;
       db.query(sql, function(err) {
         if(err) throw err;
         console.log("Message Inserted");

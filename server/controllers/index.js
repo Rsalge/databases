@@ -9,7 +9,10 @@ module.exports = {
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       console.log("INSIDE CONTROLER POST", req.body);
-      models.messages.post(req.body)
+
+      models.messages.post(req.body, function () {
+        res.writeStatus(201);
+      })
     }
   },
 
